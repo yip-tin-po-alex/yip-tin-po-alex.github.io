@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Name | Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        /* --- CSS VARIABLES & RESET --- */
+        :root {
+            --sidebar-width: 320px;
+            --primary-blue: #1e3a5f;   /* Deep Professional Blue */
+            --accent-blue: #3498db;    /* Bright Blue for links */
+            --light-blue: #ebf2fa;     /* Very faint blue for main background */
+            --text-dark: #2c3e50;
+            --text-light: #ffffff;
+            --white: #ffffff;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            color: var(--text-dark);
+            background-color: var(--white);
+            line-height: 1.6;
+            display: flex;
+            min-height: 100vh;
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--accent-blue);
+            transition: 0.3s;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        h1, h2, h3 {
+            color: var(--primary-blue);
+            font-weight: 700;
+        }
+
+        /* --- SIDEBAR (LEFT COLUMN) --- */
+        #sidebar {
+            width: var(--sidebar-width);
+            background-color: var(--primary-blue); /* Updated Blue Tone */
+            color: var(--text-light);
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 50px 30px;
+            text-align: center;
+            box-shadow: 4px 0 15px rgba(0,0,0,0.1);
+        }
+
+        .profile-img {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid rgba(255, 255, 255, 0.2);
+            margin-bottom: 25px;
+            background-color: #fff;
+        }
+
+        .sidebar-name {
+            font-size: 1.8rem;
+            color: var(--white);
+            margin-bottom: 10px;
+        }
+
+        .sidebar-email {
+            font-size: 0.95rem;
+            color: #d1d9e6; /* Soft blue-grey text */
+            margin-bottom: 25px;
+            display: block;
+        }
+
+        .sidebar-email:hover {
+            color: var(--white);
+        }
+
+        .social-links {
+            margin-bottom: 40px;
+        }
+
+        .social-links a {
+            color: var(--white);
+            font-size: 1.4rem;
+            margin: 0 12px;
+            opacity: 0.8;
+        }
+
+        .social-links a:hover {
+            opacity: 1;
+            transform: translateY(-2px);
+            display: inline-block;
+        }
+
+        /* Sidebar Navigation */
+        .nav-links {
+            list-style: none;
+            width: 100%;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 30px;
+        }
+
+        .nav-links li {
+            margin-bottom: 20px;
+        }
+
+        .nav-links a {
+            color: #d1d9e6;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-weight: 400;
+        }
+
+        .nav-links a:hover {
+            color: var(--white);
+            text-decoration: none;
+        }
+
+        /* --- MAIN CONTENT (RIGHT COLUMN) --- */
+        #main-content {
+            margin-left: var(--sidebar-width);
+            padding: 80px 10%;
+            width: 100%;
+        }
+
+        section {
+            margin-bottom: 50px;
+            max-width: 850px;
+        }
+
+        .section-header {
+            font-size: 2.2rem;
+            margin-bottom: 40px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .section-header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: var(--accent-blue);
+        }
+
+        /* --- SKILLS LIST --- */
+        .skills-list {
+            list-style: none;
+            display: grid;
+            grid-template-columns: 1fr 1fr; /* Two column list */
+            gap: 15px;
+        }
+
+        .skills-list li {
+            font-size: 1.1rem;
+            padding-left: 30px;
+            position: relative;
+        }
+
+        .skills-list li::before {
+            content: '\f058'; /* Check circle icon */
+            font-family: 'Font Awesome 5 Free';
+            font-weight: 900;
+            color: var(--accent-blue);
+            position: absolute;
+            left: 0;
+        }
+
+        /* --- TIMELINE (EDUCATION & EXPERIENCE) --- */
+        .timeline {
+            border-left: 2px solid #e9ecef;
+            margin-left: 10px;
+            padding-left: 35px;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 50px;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            background: var(--white);
+            border: 3px solid var(--primary-blue);
+            border-radius: 50%;
+            left: -44px;
+            top: 6px;
+        }
+
+        .timeline-date {
+            font-size: 0.9rem;
+            color: var(--accent-blue);
+            font-weight: 700;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        /* --- PUBLICATIONS --- */
+        .pub-item {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border-left: 5px solid var(--primary-blue);
+        }
+
+        .pub-title {
+            font-size: 1.2rem;
+            color: var(--primary-blue);
+            font-weight: 700;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        /* --- RESPONSIVE --- */
+        @media screen and (max-width: 1024px) {
+            body { flex-direction: column; }
+            #sidebar { 
+                width: 100%; 
+                height: auto; 
+                position: relative; 
+                padding: 40px 20px;
+            }
+            #main-content { margin-left: 0; padding: 60px 5%; }
+            .skills-list { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <aside id="sidebar">
+        <img src="profile_pic.jpg" alt="Profile Picture" class="profile-img">
+        
+        <h1 class="sidebar-name">Alex Yip</h1>
+        
+        <a href="mailto:tpyip@connect.ust.hk" class="sidebar-email">
+            <i class="fas fa-envelope"></i> tpyip@connect.ust.hk
+        </a>
+
+        <div class="social-links">
+            <a href="https://linkedin.com/in/yourprofile" target="_blank" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            <a href="https://github.com/yourprofile" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+            <a href="https://scholar.google.com" target="_blank" title="Google Scholar"><i class="fas fa-graduation-cap"></i></a>
+        </div>
+
+        <nav>
+            <ul class="nav-links">
+                <li><a href="#about">About Me</a></li>
+                <li><a href="#education">Education</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#publications">Publications</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <main id="main-content">
+        
+        <section id="about">
+            <h2 class="section-header">About Me</h2>
+            <p style="font-size: 1.2rem; color: #555;">
+                I am an undergraduate student at HKUST studying computer engineering. 
+                My research interests include explainable AI, machine learning, natural language processing, and large language models. 
+                In my spare time, I enjoy listening to music and reading novels. Please feel free to contact me for collaborations.
+            </p>
+        </section>
+
+        <section id="education">
+            <h2 class="section-header">Education</h2>
+            <div class="timeline">
+                <!--
+                <div class="timeline-item">
+                    <span class="timeline-date">2020 — 2024</span>
+                    <h3>Ph.D. in Computer Science</h3>
+                    <p><a href="https://university.edu" target="_blank">[University Name]</a></p>
+                    <p>Focus: Artificial Intelligence & Machine Learning</p>
+                </div>
+                -->
+                <div class="timeline-item">
+                    <span class="timeline-date">2023 — Present</span>
+                    <h3>Bachelor in Computer Engieering</h3>
+                    <p><a href="https://hkust.edu.hk/" target="_blank">Hong Kong University of Science and Technology</a></p>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills">
+            <h2 class="section-header">Technical Skills</h2>
+            <ul class="skills-list">
+                <li><strong>Languages:</strong> Python, C++, C, Java</li>
+                <li><strong>ML Frameworks:</strong> PyTorch, Tensorflow, Keras, Scikit-learn</li>
+                <li><strong>Data Visualization:</strong> Seaborn, Matplotlib, Pandas, Numpy</li>
+                <li><strong>Tools:</strong> Github, LaTeX</li>
+            </ul>
+        </section>
+
+        <section id="experience">
+            <h2 class="section-header">Research Experience</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <span class="timeline-date">August 2025 — Present</span>
+                    <h3>Large Language Model Research Assistant</h3>
+                    <p>Researching Large Language Model (LLM) explainability and reasoning frameworks to enhance model transparency.
+                        Curated and structured large-scale datasets to ensure high-quality training and evaluation inputs.
+                        Conducted empirical observation experiments on open-source LLMs to analyze behavioral patterns.
+                        Engineered steering mechanisms and programmatic interventions to align model outputs with intended behavioral constraints.
+                    </p>
+                </div>
+                <div class="timeline-item">
+                    <span class="timeline-date">August 2025 — Present</span>
+                    <h3>Machine Learning Research Assistant</h3>
+                    <p>Researching state-of-the-art (SOTA) architectures for real-time driver fatigue detection.
+                        Developed an automated facial recognition pipeline to generate high-fidelity ground truth labels for fatigue states. 
+                        Engineered a novel end-to-end model capable of processing raw, unpreprocessed data, consistently surpassing existing SOTA benchmarks across all performance metrics.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section id="publications">
+            <h2 class="section-header">Publications</h2>
+            <div class="pub-item">
+                <a href="#" class="pub-title">Good Arguments Against the People Pleasers: How Reasoning Mitigates (Yet Masks) LLM Sycophancy</a>
+                <p><em>Under submission to ACL ARR 2026 January</em></p>
+                <p>Zhaoxin Feng, Zheng CHEN, Jianfei Ma, <b>Yip Tin Po</b>, Emmanuele Chersoni, Bo Li</p>
+            </div>
+            <div class="pub-item">
+                <a href="#" class="pub-title">LogiConBench: Benchmarking Logical Consistencies of LLMs</a>
+                <p><em>Under submission to ICLR 2026</em></p>
+                <p>Zheng CHEN, Chuan Zhou, Fengxiang Cheng, <b>Yip Tin Po</b>, Fenrong Liu, Yisen Wang, Jiajun Chai,
+                    Xiaohan Wang, Guojun Yin, Wei Lin, Haoxuan Li, Bo Li, Zhouchen Lin</p>
+            </div>
+        </section>
+    </main>
+
+</body>
+</html>
